@@ -1,0 +1,98 @@
+%-------------------------------------------------------------------------------
+% 简历风格
+%-------------------------------------------------------------------------------
+\documentclass[a4paper,nolmodern]{moderncv}
+\moderncvtheme[orange]{classic}
+
+
+%-------------------------------------------------------------------------------
+% 包含sty文件中的设定
+% 1. 中文支持
+% 2. 行间距设定
+% 3. 字体设定
+% 4. 字体设定
+%-------------------------------------------------------------------------------
+\usepackage{config}
+
+
+%-------------------------------------------------------------------------------
+% 个人信息设定
+%-------------------------------------------------------------------------------
+% 个人经历起止时间
+\usepackage[firstyear=2005,lastyear=2015]{moderntimeline}
+%\title{工程师}
+\firstname{name}
+\familyname{xx}
+\mobile{18612275838}
+%\fax{fax (optional)}
+\email{loadingvx@163.com}
+\homepage{www.liangchengming.com}
+%\photo[64pt]{identity}
+
+\extrainfo{%
+\octocat~\httplink{www.github.com/loadingvx}\\%
+}
+
+%\myquote{踏实做人}{liangchengming}
+
+%-------------------------------------------------------------------------------
+% 简历正文
+%-------------------------------------------------------------------------------
+
+\begin{document}
+%\hyphenpenalty=10000
+
+\maketitle
+
+\section{技能}
+
+\subsection{语言工具}
+\cvcomputer{Languages}{C, Python, C++, markdown}
+           {}{}
+\cvcomputer{Frameworks}{libevhtp(http)}
+           {Databases}{MySQL}
+
+\cvcomputer{Source Management}{GIT, SVN}
+           {Tools}{Autotools, Cmake}
+
+\devnotes{Developer}{Contributor}
+
+\section{Experience}
+\subsection{IT Experience}
+
+\tlcventry{2014}{0}{后台开发}{广告系统}{HTTP Server}{}{%
+\begin{tightitemize}
+ \item 推荐系统后台服务的开发和维护, 使用c/c++, 基于Libevhtp架构.
+ \item 开发实现了整个后台架构, 并另外3人分别负责单独的模块.
+\end{tightitemize}}
+
+\tlcventry{2012}{0}{后台开发}{推荐系统, 广告系统}{HTTP Server}{}{%
+\begin{tightitemize}
+ \item 推荐系统后台服务的开发和维护, 使用c/c++, 基于Libevhtp架构.
+ \item 开发实现了整个后台架构, 并另外3人分别负责单独的模块.
+ \item 基于Redis存储和文件,对外提供推荐结果, 日PV 600万, 响应时间4ms
+\end{tightitemize}}
+
+\subsection{Other Experience}
+
+\tlcventry{2009}{0}{Translator and Editor}{La Colombe Calvary}{Nice}{}{%
+\begin{tightitemize}%
+ \item Translation of English theology books into French;
+ \item Edition of books using \LaTeX{}, \XeTeX{} and \LuaTeX{};
+\end{tightitemize}}
+
+
+\pagebreak
+
+\section{教育}
+
+\tldatecventry{2012}{Puppet Trainer}{\href{https://puppetlabs.com/services/puppet-training/}{PuppetLabs}}{Amsterdam}{}{Official Training Partner for PuppetLabs' courses (Puppet Fundamentals, Puppet Advanced, Extending Puppet with Ruby)}
+\tldatecventry{2009}{ITIL{\LARGE\textregistered} v3 Foundation}{\href{http://www.itil-officialsite.com/home/home.asp}{EXIN}}{Sophia Antipolis}{}{Organization and efficiency of the Information System}
+\tldatecventry{2005}{Student in Business Creation and Management}{\href{http://www.creation-transmission.com/}{Cr\'eafort}}{Poitiers}{}{Accounting, Management, Marketing, Law}
+
+
+\section{Foreign Languages}
+\cvlanguage{English}{Good}{Daily practice}
+
+\end{document}
+
