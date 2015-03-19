@@ -4,13 +4,12 @@
 \documentclass[a4paper,nolmodern]{moderncv}
 \moderncvtheme[orange]{classic}
 
-
 %-------------------------------------------------------------------------------
 % 包含sty文件中的设定
 % 1. 中文支持
 % 2. 行间距设定
 % 3. 字体设定
-% 4. 字体设定
+% 4. 编码设定
 %-------------------------------------------------------------------------------
 \usepackage{config}
 
@@ -21,18 +20,21 @@
 % 个人经历起止时间
 \usepackage[firstyear=2005,lastyear=2015]{moderntimeline}
 %\title{工程师}
-\firstname{name}
-\familyname{xx}
+\firstname{梁成明}
+\familyname{}
 \mobile{18612275838}
 %\fax{fax (optional)}
 \email{loadingvx@163.com}
 \homepage{www.liangchengming.com}
-%\photo[64pt]{identity}
+\photo[80pt]{identity}
 
 \extrainfo{%
 \octocat~\httplink{www.github.com/loadingvx}\\%
 }
 
+\myquote{工作以来常用python和c语言. 在当当工作3年, 主要工作为服务器端开发,
+有大数据工具使用经验, 重构过当当网推荐后台和广告后台,有少量机器学习工作}
+{}
 %\myquote{踏实做人}{liangchengming}
 
 %-------------------------------------------------------------------------------
@@ -40,59 +42,83 @@
 %-------------------------------------------------------------------------------
 
 \begin{document}
-%\hyphenpenalty=10000
+\hyphenpenalty=10000
 
 \maketitle
 
 \section{技能}
 
-\subsection{语言工具}
-\cvcomputer{Languages}{C, Python, C++, markdown}
-           {}{}
-\cvcomputer{Frameworks}{libevhtp(http)}
-           {Databases}{MySQL}
+\cvcomputer{主要语言}{C, Python, C++, markdown}
+           {常用工具}{Vim}
+\cvcomputer{常用框架}{libevhtp(http), Hadoop, spark}
+           {数据存储}{MySQL, HDFS, Redis}
 
-\cvcomputer{Source Management}{GIT, SVN}
-           {Tools}{Autotools, Cmake}
+\cvcomputer{代码管理}{GIT, SVN}
+           {常用系统}{Linux CentOS}
 
-\devnotes{Developer}{Contributor}
+%\devnotes{Developer}{Contributor}
 
-\section{Experience}
-\subsection{IT Experience}
+\section{教育和经历}
+\tlcventry{2012}{0}{北京当当网信息技术有限公司}{营销系统开发部}{推荐算法}{开发工程师} {%
+}
 
-\tlcventry{2014}{0}{后台开发}{广告系统}{HTTP Server}{}{%
+\tlcventry{2012}{0}{北京当当网信息技术有限公司}{营销系统开发部}{广告联盟}{开发工程师} {%
+}
+
+\tlcventry{2012}{0}{北京当当网信息技术有限公司}{营销系统开发部}{个性化推荐组}{开发工程师} {%
+}
+
+\tlcventry{2012}{0}{北京当当网信息技术有限公司}{营销系统开发部}{大数据组}{开发工程师} {%
+}
+
+\tlcventry{2009}{2012}{北京航空航天大学}{NLSDE国家重点实验室}{计算机技术}{硕士学位} {%
+}
+
+\tlcventry{2005}{2009}{山东大学(威海)}{~}{软件工程}{学士学位} {%
+}
+
+\section{工作内容}
+
+\tldatecventry{2014.10}{}{算法模型开发}{LR/Spark}{python,spark}{%
 \begin{tightitemize}
- \item 推荐系统后台服务的开发和维护, 使用c/c++, 基于Libevhtp架构.
- \item 开发实现了整个后台架构, 并另外3人分别负责单独的模块.
+ \item ~迁移算法程序到Spark
+ \item ~共4人负责算法模型, 使用python语言开发, 个人负责样本生成模块.
+ \item ~LR模型, 由liblinear迁移spark完毕,工程持续越1个月. AUC保持在0.71
 \end{tightitemize}}
 
-\tlcventry{2012}{0}{后台开发}{推荐系统, 广告系统}{HTTP Server}{}{%
+\tldatecventry{2014.8}{}{后台开发}{广告后台}{C/C++, python HTTP}{%
 \begin{tightitemize}
- \item 推荐系统后台服务的开发和维护, 使用c/c++, 基于Libevhtp架构.
- \item 开发实现了整个后台架构, 并另外3人分别负责单独的模块.
- \item 基于Redis存储和文件,对外提供推荐结果, 日PV 600万, 响应时间4ms
+ \item ~维护当当单品页面广告后台服务
+ \item ~带领另外1人, 重构部分代码.
 \end{tightitemize}}
 
-\subsection{Other Experience}
-
-\tlcventry{2009}{0}{Translator and Editor}{La Colombe Calvary}{Nice}{}{%
-\begin{tightitemize}%
- \item Translation of English theology books into French;
- \item Edition of books using \LaTeX{}, \XeTeX{} and \LuaTeX{};
+\tldatecventry{2012.2}{}{后台开发}{推荐后台}{C/C++, golang HTTP}{%
+\begin{tightitemize}
+ \item 2012-2013 推荐系统后台服务的开发和维护, 使用c/c++, 基于Libevhtp架构.
+ \item 2012-2013 设计实现了基于Redis的商品实时数据API服务, QPS 5000左右,
+目前已经发展为个性化推荐组和广告组, 相关前台的基础API. 后交付他人维护.
+ \item 2013-2014 重写后台新架构(golang), 重构数据端离线作业和调度, 服务支持了简
+单灰度发布,算法对比. 可在线实时切分流量, 增加数据回路的支持, log支持hive数据格式.
+ \item 推荐服务日PV约600-800万, 响应时间2ms-5ms
+ \item 期间参与部分推荐算法数据的生成(3人),简单使用Apriori计算候选集,并应用在购物车页面.
 \end{tightitemize}}
 
-
-\pagebreak
-
-\section{教育}
-
-\tldatecventry{2012}{Puppet Trainer}{\href{https://puppetlabs.com/services/puppet-training/}{PuppetLabs}}{Amsterdam}{}{Official Training Partner for PuppetLabs' courses (Puppet Fundamentals, Puppet Advanced, Extending Puppet with Ruby)}
-\tldatecventry{2009}{ITIL{\LARGE\textregistered} v3 Foundation}{\href{http://www.itil-officialsite.com/home/home.asp}{EXIN}}{Sophia Antipolis}{}{Organization and efficiency of the Information System}
-\tldatecventry{2005}{Student in Business Creation and Management}{\href{http://www.creation-transmission.com/}{Cr\'eafort}}{Poitiers}{}{Accounting, Management, Marketing, Law}
+\tldatecventry{2012.2}{}{数据报表相关}{Hadoop后台}{python}{%
+\begin{tightitemize}
+ \item 入职当当网之后的第一份工作为整合内部各个子系统的入口, 做单点登陆.
+ \item 设计方案,并实现了基于SSL验证的统一登陆接口(Java),供所有子系统调用.(基于LDAP协议)
+ \item 后交付他人维护, 目前已经对接越20多个子系统.
+ \item 之后主要负责大数据相关基础数据生成, 主要为当当用户的点击浏览数据统计,由
+log数据生成树形结构, 为算法提供基础行为数据. 后交付他人维护.数据每日更新, 供推荐流程使用.
+\end{tightitemize}}
 
 
 \section{Foreign Languages}
-\cvlanguage{English}{Good}{Daily practice}
+\cvlanguage{英语}{Good}{}
+
 
 \end{document}
+
+
+
 
