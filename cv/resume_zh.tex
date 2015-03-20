@@ -96,20 +96,30 @@
 \begin{tightitemize}
  \item 2012-2013 推荐系统后台服务的开发和维护, 使用c/c++, 基于Libevhtp架构.
  \item 2012-2013 设计实现了基于Redis的商品实时数据API服务, QPS 5000左右,
-目前已经发展为个性化推荐组和广告组, 相关前台的基础API. 后交付他人维护.
- \item 2013-2014 重写后台新架构(golang), 重构数据端离线作业和调度, 服务支持了简
-单灰度发布,算法对比. 可在线实时切分流量, 增加数据回路的支持, log支持hive数据格式.
- \item 推荐服务日PV约600-800万, 响应时间2ms-5ms
- \item 期间参与部分推荐算法数据的生成(3人),简单使用Apriori计算候选集,并应用在购物车页面.
+ \begin{tightitemize}
+   \item 目前已经发展为个性化推荐组和广告组, 相关前台的基础API. 后交付他人维护.
+ \end{tightitemize}
+ \item 2013-2014 重写后台新架构(golang), 重构数据端离线作业和调度
+ \begin{tightitemize}
+   \item 服务支持了简单灰度发布,算法对比. 可在线实时切分流量, 增加数据回路的支持, log支持hive数据格式.
+   \item 推荐服务日PV约600-800万, 响应时间2ms-5ms
+   \item 期间参与部分推荐算法数据的生成(3人),简单使用Apriori计算候选集,并应用在购物车页面.
+ \end{tightitemize}
+\end{tightitemize}
+}
+
+\tldatecventry{2011.6}{}{数据报表相关}{Hadoop后台}{python}{%
+\begin{tightitemize}
+ \item 之后主要负责大数据相关基础数据生成
+ \item 当当用户的点击浏览数据统计,由log数据生成树形结构, 为算法提供基础行为数据.
+ \item 后交付他人维护.数据每日更新, 供推荐流程使用至今.
 \end{tightitemize}}
 
-\tldatecventry{2012.2}{}{数据报表相关}{Hadoop后台}{python}{%
+\tldatecventry{2011.2}{单点登陆}{内部系统}{}{Java/LDAP}{%
 \begin{tightitemize}
  \item 入职当当网之后的第一份工作为整合内部各个子系统的入口, 做单点登陆.
  \item 设计方案,并实现了基于SSL验证的统一登陆接口(Java),供所有子系统调用.(基于LDAP协议)
  \item 后交付他人维护, 目前已经对接越20多个子系统.
- \item 之后主要负责大数据相关基础数据生成, 主要为当当用户的点击浏览数据统计,由
-log数据生成树形结构, 为算法提供基础行为数据. 后交付他人维护.数据每日更新, 供推荐流程使用.
 \end{tightitemize}}
 
 
