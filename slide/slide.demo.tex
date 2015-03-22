@@ -1,0 +1,340 @@
+\documentclass[CJK,blue]{beamer}
+%如果编译在这里卡住，请去掉dvipdfm选项。较早的版本需要加这个选项才能通过
+
+\usepackage{fontspec}
+\usepackage{xltxtra}
+\usepackage[section]{minted}
+\usepackage{ctex}
+
+%\usepackage{beamerthemesplit}
+%\usepackage{xunicode}
+
+%\usetheme{Luebeck}
+\usetheme{Dresden}
+%\usetheme{Antibes}
+%\usetheme{Berkeley}
+%\usetheme{CambridgeUS}
+
+%\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+
+%\usecolortheme{crane}
+%\usecolortheme{seagull}
+%\usecolortheme{dove}
+%\usecolortheme{wolverine}
+%\usecolortheme{dolphin}
+%\usecolortheme{beetle}
+\usecolortheme{spruce}
+%\usecolortheme{orchid}
+%\usecolortheme{whale}
+
+%\usepackage[xetex,bookmarksnumbered,bookmarksopen,colorlinks,
+%citecolor=black,linkcolor=black,CJKbookmarks=true]{hyperref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 数学公式style
+\usepackage{amsmath,amssymb}
+\newcommand\ibinom[2]{\genfrac\lbrace\rbrace{0pt}{}{#1}{#2}}
+\usepackage{bm}
+\usepackage{txfonts}
+\usepackage{amsopn}
+%\usepackage{pxfonts}
+%% 数学公式的字体命令
+%\mathrm罗马直立
+%\mathit   罗马斜体
+%\mathbf 直立粗体
+%\mathcal 花体
+%\mathtt
+%\mathsf
+%\rm 罗马字体 \it 意大利字体
+%\bf 黑体(boldface) \sl 倾斜体
+%\sf 等线体 \sc 小体大写字母
+%\tt 打字机字体 \mit 数学斜体
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{tocdepth}{1}
+
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+
+%\setmainfont{WenQuanYi Micro Hei}
+%\setsansfont[Mapping=tex-text,BoldFont={WenQuanYi Micro Hei}]
+%                {WenQuanYi Micro Hei}
+\setCJKmainfont{WenQuanYi Micro Hei}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 正文开始;
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{MLE MAP以及 Bayesian Estimation}
+\author{liangchengming@dangdang.com}
+\date{\today}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \titlepage
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{frame}
+%    \tableofcontents
+%\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Bayesian}
+\begin{frame}[fragile]
+\frametitle{名词解释 和 基本内容}
+{\small{
+\begin{enumerate}
+\item 名词解释
+    \begin{enumerate}
+    \item {\textcolor{blue}{MLE}} 最大似然估计(Maximum-likelihood Estimation)
+    \item {\textcolor{blue}{MAP}} 最大后验概率(Maximum-a-Posteriori Estimation)
+    \item {\textcolor{blue}{Bayesian Estimation}} 贝叶斯估计
+    \end{enumerate}
+\item 基本内容
+    \begin{enumerate}
+    \item 帮助大家增强对样本的敏感性, 灵活使用MLE和MAP, 贝叶斯估计.
+    \end{enumerate}
+\end{enumerate}
+}}
+\end{frame}
+
+%{\tiny{
+%\item 不涉及的问题
+%    \begin{enumerate}
+%    \item 所有贝叶斯公式出现之后的扩展理论
+%    \item 频率主义者和贝叶斯主义者的无聊的站队
+%    \end{enumerate}
+%}}
+%\item ${p^ * }$
+%\item $P = \{p|{E_p}{f_j} = {E_{\mathop p\limits^ \sim }}{f_j},j = \{ 1...k\}\}$
+%\item $H(p) =  - \sum\limits_{x \in \varepsilon } {p(x)\log p(x)}$
+%{\tiny{
+%\begin{minted}[frame=single]{sh}
+%\end{minted}
+%}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{最大似然估计(MLE)}
+{\small{
+\begin{enumerate}
+\item 模型已定，参数未知
+    \begin{enumerate}
+    \item 假设样本数据\(\mit{ D = \{x_{1}, x_{2}, \ldots, x_{n}\} }\)独立同分布
+    \item 求解似然函数的参数\(\mit{
+        \hat\theta_{mle} = \arg\underset{\theta\in\Theta}{\max}\ln{L(\theta)}
+    }\)
+    \end{enumerate}
+\end{enumerate}
+}}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{使用MLE解决如下问题}
+
+基于以下样本求出IT男\(\mit{x_{1}}\)是最有可能取的那个袋子?
+\begin{enumerate}
+\item 慷哥每次买好两袋甜饼
+\item 一袋是红豆馅30\%, 绿豆70\%, 另一袋则相反.
+\item 样本的获取方法是科学的.
+\item 观察值都是具体实验的真值.
+\end{enumerate}
+{\tiny{
+\begin{table}[!htdp]
+\begin{center}
+\begin{tabular}{|c|p{3cm}|}\hline
+某IT男  & 甜品样本 \\  \hline
+\(\mit{x_{1}}\)  & 红豆馅 \\  \hline
+\(\mit{x_{1}}\)  & 红豆馅 \\  \hline
+\(\mit{x_{2}}\)  & 红豆馅 \\  \hline
+\(\mit{x_{2}}\)  & 红豆馅 \\  \hline
+\(\mit{x_{2}}\)  & 绿豆馅 \\  \hline
+\(\mit{x_{3}}\)  & 绿豆馅 \\  \hline
+\(\mit{x_{3}}\)  & 绿豆馅 \\  \hline
+\(\mit{x_{4}}\)  & 红豆馅 \\  \hline
+\end{tabular}
+\caption{观察所得样本}
+\end{center}
+\end{table}
+}}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{MLE的思路}
+最大似然估计, 当然是红豆馅70\%的那个袋子啦!
+\begin{enumerate}
+\item 强烈的体现了样本数据的规律.
+\item \(\mit{\hat\theta_{mle} =
+\arg\underset{\theta\in\Theta}{\max} P(X|\theta)
+}\)
+\end{enumerate}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{MLE分析}
+{\small{
+MLE求解的简单分析:
+\begin{enumerate}
+\item MLE的求解思路在理论上是正确的.
+\item 可惜往往样本不是独立同分布的, 样本行出现的概率是不一致的.
+\end{enumerate}
+
+调查数据样本: \(\mit{x_{i}, (i=1,2,\ldots,N) }\)的是否对袋子有偏好?
+\begin{enumerate}
+\item 先知告诉我们, \(\mit{x_{2}}\)其实30\%红豆的袋子距离该IT男更近.
+\item 如何将这一先验知识放入到模型中?
+\end{enumerate}
+}}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{样本的重新认识}
+{\small{
+\begin{enumerate}
+    \item 如果行之间不是独立同分布, 如何均等的将它们放入到计算逻辑.
+    \item \(\mit{x_{2}}\)的样本取值其实依赖于自身分布的条件概率.
+    \item 实际样本观测到的概率服从条件分布\(\mit{P(x_{2}|\alpha)}\)
+\end{enumerate}
+}}
+
+IT男\(\mit{x_{i}}\)对靠近自己的袋子的偏好分布:
+{\tiny{
+\begin{table}[!htdp]
+\begin{center}
+\begin{tabular}{|c|p{3cm}|}\hline
+袋子  & 袋子的偏好 \\  \hline
+\(\mit{bag_{1}}\)  & 0.1 \\  \hline
+\(\mit{bag_{2}}\)  & 0.9 \\  \hline
+\end{tabular}
+\caption{\(\mit{x_{i}}\)样本所属的先验分布}
+\end{center}
+\end{table}
+}}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{最大后验概率估计(MAP)}
+{\small{
+\begin{enumerate}
+    \item 假设模型参数依赖于先验分布
+    \item 计算有先验分布时样本集合出现最大后验概率的模型参数.
+    \item \(\mit{\hat\theta_{map} =
+    \arg\underset{\theta}{\max}f(x|\theta)g(\theta)}\)
+\end{enumerate}
+}}
+
+{\tiny{
+\begin{table}[!htdp]
+\begin{center}
+\begin{tabular}{|c|p{2.5cm}|p{1.5cm}|}\hline
+某IT男  & 甜品样本 & 合理性 \\  \hline
+\(\mit{x_{1}}\)  &  红豆馅 & \(\mit{priori(bag_{k})}\) \\  \hline
+\(\mit{x_{1}}\)  &  红豆馅 & \(\mit{priori(bag_{k})}\) \\  \hline
+\(\mit{x_{2}}\)  &  红豆馅 & \(\mit{priori(bag_{k})}\) \\  \hline
+\(\mit{x_{2}}\)  &  红豆馅 & \(\mit{priori(bag_{k})}\) \\  \hline
+\(\mit{x_{2}}\)  &  绿豆馅 & \(\mit{priori(bag_{k})}\) \\  \hline
+\(\mit{x_{3}}\)  &  红豆馅 & \(\mit{priori(bag_{k})}\) \\  \hline
+\(\mit{x_{3}}\)  &  绿豆馅 & \(\mit{priori(bag_{k})}\) \\  \hline
+\(\mit{x_{4}}\)  &  红豆馅 & \(\mit{priori(bag_{k})}\) \\  \hline
+\end{tabular}
+\caption{新的样本集合}
+\end{center}
+\end{table}
+}}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{MAP的思路}
+计算所有人接触时间和合理性共同作用之后的最大值
+{\small{
+\begin{enumerate}
+\item 将先验概率添加模型, 并同样本一起参与运算.
+\item \(\mit{\hat\theta_{map} =
+    \arg\underset{\theta\in\Theta}{\max}\displaystyle{
+    \sum_{\hat\theta=x_{k}}P(X|\theta)*priori(\hat\theta)}
+    }\)
+\end{enumerate}
+
+\begin{enumerate}
+\item 有时无法得知先验, 或者得到的先验概率仍然是均匀分布.
+\item MAP认为当前模型参数\(\mit{\theta}\)依赖于某个先验分布.
+\item MLE假设模型参数\(\mit{\theta}\)为定值, 样本独立同分布(自身的分布)
+\end{enumerate}
+}}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+    \frametitle{贝叶斯估计(Bayesian Estimation)}
+{\scriptsize{
+\begin{enumerate}
+\item 贝叶斯公式: \(\mit{P(\theta|x) = (P(x|\theta)*P(\theta|\alpha)/P(x)}\)
+    \begin{enumerate}
+    \item MLE是在对被估计量没有任何先验知识的前提下求得:
+            先验概率\(\mit{g(\theta|\alpha)=1}\)样本独立同分布
+    \item MAP是在对被估计量给定先验概率的情况下求得:
+            先验概率\(\mit{g(\theta|\alpha)=k}\)考虑样本行的差别
+    \item 贝叶斯估计关心新的测量数据的出现的概率估计
+    \item 直观上后验分布应该同我们假设的先验分布形式相同,属于同一个函数族.
+    \item \(\mit{conjugate_{f}(\hat{x}|X) = \int_{\theta\in\Theta}
+f(\hat{x}|\theta)\frac{f(X|\theta)conjugate_{f}(\theta)}{P(X)}d\theta}\)
+    \end{enumerate}
+\end{enumerate}
+}}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+    \frametitle{Frequentist vs. Bayesian statistics}
+{\scriptsize{
+MLE和MAP\footnote{MAP一般不作为贝叶斯方法}都基于样本求出了实验发生概率
+最大情况下的待估计参数.贝叶斯估计则是同时在不算出具体分布参数的值的情况下, 将参
+数在空间上积分得到一基于参数分布和样本实验共同确定的后验分布.
+}}
+{\small{
+\begin{enumerate}
+\item 先验分布的得到是主观的,所以有争议.
+\item 贝叶斯派:目前的观察是充斥着大量已知条件的随机实验而已,上帝掷骰子定了一套现
+        在的实验参数. 知识永远不完备, 要对未知因素建模, 最多求出概率取值的分布.
+\item 频率派:目前的观察是必须尊重的, 模型怎么会那么复杂? 多拿些样本就可以了. 模
+        型参数就是简单值, 没有超参. 长期观察实验得到的那个极限值就是概率.
+\end{enumerate}
+}}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+    \frametitle{Frequentist vs. Bayesian statistics}
+{\scriptsize{
+频率派和贝叶斯派对待甜品的态度:
+}}
+{\small{
+\begin{enumerate}
+\item 贝叶斯派: 你这个观察不完备啊, 1号IT男拿到红豆馅的这个事件的发生,
+    后面有非常多的其他因素制约, 它是那些因素组成的分布的具体值而已, 我要把袋子
+    的颜色, 吃货对红豆和绿豆的偏好, 对颜色的偏好, 袋子远近, 袋子的材质, 用户的
+    性别等等因素考虑进去, 然后在所有因素的定义域内积分出来具体的具体拿每个袋子的
+    概率模型.
+\item 频率派: 你让他继续拿呗, 等全部拿完了, 一查比例,不就知道是哪个袋子了么?
+\end{enumerate}
+}}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+    \frametitle{Thanks}
+{\large{
+Many Thanks
+}}
+\end{frame}
+
+
+\end{document}
+
+
